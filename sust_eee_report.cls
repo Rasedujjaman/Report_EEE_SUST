@@ -1,120 +1,122 @@
 %
 % Shahjalal University of Science and Technology
-% Version 0.1 released 11/01/2022
+% Dept of EEE
+
+% Version 0.1 released 11/01/2022 % This version is inspired from amu
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{sust_eee_report}[11/01/2022 Classe personnelle, V0.1]
 
 %%% Base class (KOMA-Script)
 \LoadClass{scrreprt}						    %% classe report KOMA-Script
 \KOMAoptions{
-	paper=a4,								%% taille du papier
-	fontsize=12pt,							%% taille de la police
-	DIV=12,									%% taille des marges
-	BCOR=0mm,								%% taille de la reliure
-	twoside=off,							    %% recto-verso
-	listof=totoc,							%% LOFT dans la TOC
-	index=totoc								%% index dans la TOC
+	paper=a4,								%% paper size
+	fontsize=12pt,							%% font size
+	DIV=12,									%% margin size
+	BCOR=0mm,								%% binding size
+	twoside=off,							    %% both sided
+	listof=totoc,							%% LOFT in the TOC
+	index=totoc								%% index in the TOC
 	}
 
 \RequirePackage{lipsum}						%% lorem ipsum (exemple)
 
-%%% extensions minimales
-\RequirePackage[utf8]{inputenc}				%% encodage du texte
-\RequirePackage[TS1,T1]{fontenc}			%% encodage des fontes
-%\RequirePackage{lmodern}					%% polices latines (désactivés)
-\RequirePackage{fourier}					%% polices Adobe Utopia (activés)
-\RequirePackage[main=french, english]{babel}	%% typographie (français par défaut)
-\RequirePackage[babel]{csquotes}			%% guillemets typographiques
-\MakeAutoQuote{«}{»}						%% espacement automatique des guillemets
+%%% minimal extensions
+\RequirePackage[utf8]{inputenc}				%% text encoding
+\RequirePackage[TS1,T1]{fontenc}			%% font encoding
+%\RequirePackage{lmodern}					%% Latin fonts (disabled)
+\RequirePackage{fourier}					%% Adobe Utopia fonts (enabled)
+\RequirePackage[main=french, english]{babel}	%% typography (English by default)
+\RequirePackage[babel]{csquotes}			%% typographic quotes
+\MakeAutoQuote{«}{»}						%% automatic quotation mark spacing
 
-%%% typographie et mise en page
-\RequirePackage{scrhack}					%% macros personnalisées (KOMA-Script)
+%%% typography and layout
+\RequirePackage{scrhack}					%% custom macros (KOMA-Script)
 \RequirePackage[
-	automark,								%% rappel du titre de chapître en en-tête
-	autooneside=false						%% nécessaire pour le rappel du chapître et de la partie en en-tête
-	]{scrlayer-scrpage}						%% en-tête/pied de page personnalisés (KOMA-Script)
-\RequirePackage{textcomp}					%% symboles complémentaires
-\RequirePackage{hyphenat}					%% césure explicite
-\RequirePackage{microtype}					%% microtypographie
+	automark,								%% reminder of the chapter title in the header
+	autooneside=false						%% necessary for the reminder of the chapter and the header part
+	]{scrlayer-scrpage}						%% custom header / footer (KOMA-Script)
+\RequirePackage{textcomp}					%% complementary symbols
+\RequirePackage{hyphenat}					%% explicit hyphenation
+\RequirePackage{microtype}					%% microtypography
 
-\RequirePackage[bottom=10em]{geometry}		%% réduit le bas de page pour pouvoir numéroter les pdf insérés (réduire plus si nécessaire)
-\RequirePackage{setspace}					%% modification de l'interligne
+\RequirePackage[bottom=10em]{geometry}		%% reduce the footer to be able to number the inserted pdf (reduce more if necessary)
+\RequirePackage{setspace}					%% line spacing modification
 
-\pagestyle{scrheadings}						%% style de page
-%\setkomafont{disposition}{\bfseries}		%% titrage en police sérif (décommenter)
-%\setkomafont{descriptionlabel}{\bfseries}	%% entrée des glossaires en police sérif (décommenter)
+\pagestyle{scrheadings}						%% page style
+%\setkomafont{disposition}{\bfseries}		%% titling in serif font (uncomment)
+%\setkomafont{descriptionlabel}{\bfseries}	%% entry of glossaries in serif font (uncomment)
 
-%%% tableaux et figures
-\RequirePackage{float}						%% définit les objets flottants tels que les figures et tableaux
-\RequirePackage{graphicx}					%% graphiques et figures
-\RequirePackage[export]{adjustbox}			%% permet de définir une taille minimale ou maximale
-\RequirePackage{subfig}						%% figures multiples
+%%% tables and figures
+\RequirePackage{float}						%% defines floating objects such as figures and tables
+\RequirePackage{graphicx}					%% graphics and figures
+\RequirePackage[export]{adjustbox}			%% allows you to define a minimum or maximum size
+\RequirePackage{subfig}						%% multiple figures
 \RequirePackage{caption}					    %% légendes des figures
-\RequirePackage{tabularx}					%% tableaux
+\RequirePackage{tabularx}					%% tables
 \RequirePackage{colortbl}
-\RequirePackage{multirow}					%% fusion des cellules dans les tableaux 
-\RequirePackage{makecell}					%% sauts des lignes dans les cellules	
-\RequirePackage{array}						%% amélioration des tableaux
-\RequirePackage{booktabs}					%% tables formelles
-\RequirePackage{tikz}						%% figures en code natif
+\RequirePackage{multirow}					%% merging cells in tables
+\RequirePackage{makecell}					%% line breaks in cells	
+\RequirePackage{array}						%% improvement of tables
+\RequirePackage{booktabs}					%% formal tables
+\RequirePackage{tikz}						%% figures in native code
 \usetikzlibrary{decorations.markings}
 
-\floatplacement{figure}{!h}					%% placer une figure là où elle a été appelée
-\graphicspath{{fig/}{logo/}{Signature}}			    %% chemins vers fichiers images
+\floatplacement{figure}{!h}					%% place a figure where it was called
+\graphicspath{{fig/}{logo/}{Signature}}			    %% paths to image files
 
-%%% appareil de référence (sauf glossaires)
-\PassOptionsToPackage{						%% options biblatex
-	backend=biber,							%% compilateur par défaut pour biblatex
-%	maxnames=3,								%% nombre max. de noms auteurs
-%	minnames=3,								%% nombre min. de noms auteurs
-	sorting=none,							%% trier par nom, année, titre
-	citestyle=numeric-comp,					%% style de citation auteur-année
-%	bibstyle=alphabetic,					%% style de bibliographie alphabétique
-%	bibstyle=iso-authoryear,				%% style de bibliographie ISO 690
+%%% tools for the References (except glossaries)
+\PassOptionsToPackage{						%% biblatex options
+	backend=biber,							%% default compiler for biblatex
+%	maxnames=3,								%% max. author names
+%	minnames=3,								%% min number author names
+	sorting=none,							%% sort by name, year, title
+	citestyle=numeric-comp,					%% citation style (Author-year)
+%	bibstyle=alphabetic,					%% Bibliographic style (Alphabetic)
+%	bibstyle=iso-authoryear,				%% Bibliographic style (ISO 690)
 	bibstyle=numeric,
-	backref=true							%% liens retour des références (cf. p.)
+	backref=true							%% 
 	}
 	{biblatex}
-\RequirePackage{biblatex}					%% gestion de la bibliographie avec biblatex
-\RequirePackage{enotez}						%% notes de fin
+\RequirePackage{biblatex}					%% bibliography management with biblatex
+\RequirePackage{enotez}						%% endnotes
 \setenotez{
-	list-name=Notes,						%% titre des notes
-	totoc=chapter,							%% niveau des notes dans la TOC
-	backref									%% hyperlien retour des notes
+	list-name=Notes,						%% title of notes
+	totoc=chapter,							%% 
+	backref									%% hyperlink back to notes
 	}
 \RequirePackage{imakeidx}					%% index
-\RequirePackage[titles,subfigure]{tocloft}	%% fonctions pour TOC LOF LOT
-\RequirePackage{etoc}						%% fonctions pour TOC locale (préférable à minitoc avec KOMA-Script)
-\setuptoc{toc}{totoc}						%% ajoute la TOC à la TOC
-\newcommand{\chaptertoc}[1][Sommaire]{%		%% définit une commande pour la TOC locale (Sommaire)
-	\etocsetnexttocdepth{3}%				%% profondeur de la TOC locale
+\RequirePackage[titles,subfigure]{tocloft}	%% functions for TOC LOF LOT
+\RequirePackage{etoc}						%% functions for TOC locale (preferable to minitoc with KOMA-Script)
+\setuptoc{toc}{totoc}						%% add TOC to TOC
+\newcommand{\chaptertoc}[1][Sommaire]{%		%% defines a command for the local TOC (Summary)
+	\etocsetnexttocdepth{3}%				    %% 
 	\etocsettocstyle{\addsec*{#1}}{}%
 	\localtableofcontents%
 }
 
-\setcounter{secnumdepth}{3}					%% profondeur des sections numérotées
-\setcounter{tocdepth}{2}					%% profondeur des sections dans la table des matières
+\setcounter{secnumdepth}{3}					%% 
+\setcounter{tocdepth}{2}					%% 
 
-\addbibresource{biblio.bib}					%% fichiers sources bibliographiques
-\makeindex[									%% génère l'index
-	program=makeindex,						%% compilateur
-	options=-s these,						%% paramètres
-	columns=1,								%% nombre de colonnes
-	intoc									%% index dans la TOC
+\addbibresource{biblio.bib}					%% bibliographic source files
+\makeindex[									%% generate index
+	program=makeindex,						%% compiler
+	options=-s these,						%% settings
+	columns=1,								%% number of columns
+	intoc									%% index in the TOC
 	]
 
-%%% mathématiques, physique, chimie (à adapter)
-\RequirePackage{amsmath}					%% formules mathématiques
-\RequirePackage{amssymb}					%% symboles mathématiques
-\RequirePackage{amsfonts}					%% polices mathématiques
+%%% mathematics, physics, chemistry (to be adapted)
+\RequirePackage{amsmath}					%% mathematical formulas
+\RequirePackage{amssymb}					%% mathematical symbols
+\RequirePackage{amsfonts}					%% math fonts
 
 \RequirePackage{xspace}						%% gestions des espaces dans les macros
-\RequirePackage{xparse}						%% macros avancées
-\RequirePackage{nicefrac}					%% fractions en ligne (voir aussi xfrac)
+\RequirePackage{xparse}						%% advanced macros
+\RequirePackage{nicefrac}					%% online fractions (see also xfrac)
 \RequirePackage{xfrac}
 
-\RequirePackage{siunitx}					%% unités du système international
-\sisetup{									%% options pour les unités
+\RequirePackage{siunitx}					%% for SI unit
+\sisetup{									%% operation for the units
 	list-final-separator = { \translate{and} },	
 	list-pair-separator  = { \translate{and} },
 	output-decimal-marker = {,},
@@ -122,9 +124,9 @@
 	separate-uncertainty = true
 	}
 \PassOptionsToPackage{version=4}{mhchem}
-\RequirePackage{mhchem}						%% chimie
+\RequirePackage{mhchem}						%% Chemistry
 \RequirePackage{chemformula} % newly added 
-\RequirePackage{physics}					%% physique
+\RequirePackage{physics}					%% physics
 
 \RequirePackage[b]{esvect}   %%% to have nicer look of the vector arrow
 %%% PDF
@@ -132,23 +134,23 @@
 \RequirePackage{hyperref}					%% pdf interactifs (charger le package hyperref en dernier)
 
 \pdfminorversion=5							%% PDF en version 1.5
-\pdfobjcompresslevel 0						%% compression des objets
-\pdfcompresslevel 0							%% compression du PDF
+\pdfobjcompresslevel 0						%% Compression of the object
+\pdfcompresslevel 0							%% Level of pdf compression
 
 \hypersetup{
-	%backref=true,							%% ajout de liens (par défaut)
-	%pagebackref=true,						%% dans la bibliographie (par défaut)
-	%hyperindex=true,						%% dans l'index (par défaut)
-	%bookmarks=true,						%% signets Acrobat (par défaut)
-	breaklinks=true,						%% retour à la ligne (si lien trop long)
-	colorlinks=true,						%% colorise liens
-	urlcolor=blue,							%% couleur hyperliens
-	citecolor=blue,							%% couleur liens bibliographie
-	linkcolor=blue,							%% couleur liens internes
-	anchorcolor=blue,						%% couleur liens ancres
-	bookmarksopen=false,					%% signets repliés par défaut
-	linktocpage=false,						%% lien numéro de page dans TOC
-%% métadonnées :							%% ATTENTION à compléter
+	%backref=true,							%% add links (default)
+	%pagebackref=true,						%% in the bibliography (by default)
+	%hyperindex=true,						%% in index (default)
+	%bookmarks=true,						%% Acrobat bookmarks (default)
+	breaklinks=true,						%% newline (if link too long)
+	colorlinks=true,						%% colorize links
+	urlcolor=blue,							%% color of hyperlinks
+	citecolor=blue,							%% color links of bibliography
+	linkcolor=blue,							%% color of internal links
+	anchorcolor=blue,						%% 
+	bookmarksopen=false,					%% default folded bookmarks
+	linktocpage=false,						%% page number link in TOC
+%% métadonnées :							%% BE CAREFUL to complete
 	pdftitle={Titre},
 	pdfauthor={Prénom NOM},
 	pdfsubject={Résumé},
@@ -157,24 +159,24 @@
 
 %%% glossaires
 \RequirePackage[
-	acronym,								%% liste des acronymes
+	acronym,								%% list of acronyms
 	xindy,									%% compilateur xindy
-	toc,									%% affichage dans la TOC
-	style=altlist							%% affichage des entrées
+	toc,									%% display in the TOC
+	style=altlist							%% display of entries
 	]
-	{glossaries}							%% glossaires (charger le package glossaries après le package hyperref)
-\newglossary[nlg]{notation}{not}{ntn}{Nomenclature} % Création d'un type de glossaire 'notation'
-\makeglossaries								%% génère les glossaires
-\loadglsentries{tex/gloss}					%% fichiers sources glossaires
+	{glossaries}							%% glossaries (load the glossaries package after the hyperref package)
+\newglossary[nlg]{notation}{not}{ntn}{Nomenclature} % Creation of a glossary type 'notation'
+\makeglossaries								%% generates glossaries
+\loadglsentries{tex/gloss}					%% glossary source files
 
-%%% commandes personnelles (macros)
-\newcommand{\langue}{\emph}					%% mots en langues étrangères en italique
-\newcommand{\citital}{\emph}				%% citation en italique
+%%% personal commands (macros)
+\newcommand{\langue}{\emph}					%% words in foreign languages ​​in italics
+\newcommand{\citital}{\emph}				%% citation in italics
 
 \newcommand{\acc}{\ensuremath{\omega ^{2}=\omega ^{2}_{0}+2\alpha \theta}\xspace}
 \newcommand{\emiss}[2][]{\ensuremath{\varepsilon_{#2}^{#1}}\xspace}
 
-%%% commandes pour la page de titre
+%%% controls for title page
 \definecolor{blueamu}{RGB}{0, 101, 189}
 \definecolor{cyanamu}{RGB}{61, 183, 228}
 
@@ -194,15 +196,9 @@
 \newcommand\titb[1]{{\usefont{T1}{tit}{b}{n} #1 }}
 \makeatletter\newcommand\HUGE{\@setfontsize\Huge{28}{0}}\makeatother
 
-%%% reconfigurations personnelles
-\addto\captionsfrench{\def\tablename{Tableau}}		%% renomme Table en Tableau dans les légendes
+%%% personalized reconfigurations
+\addto\captionsfrench{\def\tablename{Tableau}}		
 
-%\renewcommand{\thefootnote}{\alph{footnote}}		%% format de numérotation des notes de bas de page (décommenter)
-%\let\footnote=\endnote								%% passe les footnote en endnote (décommenter)
 
-\renewcommand*{\sfdefault}{phv} % sélectionne la fonte Helvetica pour tout le sans sérif (titrage)
 
-%\renewcommand{\familydefault}{\sfdefault} % passe à l'utilisation du sans-serif pour tout sauf les mathématiques (décommenter : vivement déconseillé)
-
-%\renewcommand{\ifstr}{\Ifstr}               %% supprime les 'warnings' des packages non mis à jour
-%\renewcommand{\iftocfeature}{\Iftocfeature} %% selon les recommendations de The LaTeX Project Team (TeX Live 2020)
+\renewcommand*{\sfdefault}{phv} % 
