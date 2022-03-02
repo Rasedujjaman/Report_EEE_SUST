@@ -20,12 +20,15 @@
 
 \RequirePackage{lipsum}						%% lorem ipsum (exemple)
 
+
+% \RequirePackage[ddmmyyyy]{datetime}			%% the date formate
+
 %%% minimal extensions
 \RequirePackage[utf8]{inputenc}				%% text encoding
 \RequirePackage[TS1,T1]{fontenc}			%% font encoding
 %\RequirePackage{lmodern}					%% Latin fonts (disabled)
 \RequirePackage{fourier}					%% Adobe Utopia fonts (enabled)
-\RequirePackage[main=french, english]{babel}	%% typography (English by default)
+\RequirePackage[main=english]{babel}	%% typography (English by default)
 \RequirePackage[babel]{csquotes}			%% typographic quotes
 \MakeAutoQuote{«}{»}						%% automatic quotation mark spacing
 
